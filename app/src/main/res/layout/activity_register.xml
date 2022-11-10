@@ -69,15 +69,18 @@
                 android:layout_height="48dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_baseline_account_circle_24"
+                />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombre del usuario"
-                    android:background=""
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,15 +98,16 @@
                 android:layout_height="48dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_baseline_email_24"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextEmailRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Correo electronico"
-                    android:background=""
                     android:inputType="textEmailAddress"
 
                     />
@@ -123,15 +127,16 @@
                 android:layout_height="48dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_baseline_password_24"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextPasswordRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Contraseña"
-                    android:background=""
                     android:inputType="text"
 
                     />
@@ -151,22 +156,21 @@
                 android:layout_height="48dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_baseline_check_circle_outline_24"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Confirmar contraseña"
-                    android:background=""
-                    android:inputType="text"
-
-                    />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
         <Button
+            android:id="@+id/btnregister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrarse"
