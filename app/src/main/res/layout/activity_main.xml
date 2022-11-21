@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/fondo"
     tools:context=".MainActivity">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondo"
-        android:alpha="0.9"
+        android:background="#FFFFFFFF"
+        android:alpha="0.05"
         />
 
 
@@ -36,7 +38,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextInputEditTextEmail"
@@ -45,8 +47,7 @@
                     android:background="@color/cardview_dark_background"
                     android:hint="Correo electronico"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/white"
-                    tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -64,7 +65,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextInputEditTextPassword"
@@ -87,29 +88,39 @@
             android:background="@drawable/rounded_buttom"
             android:text="Iniciar sesion" />
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btnloginSignInGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
                 android:text="¿No tienes cuenta?"
-                android:textColor="@color/cardview_light_background" />
+                android:textColor="@color/cardview_light_background"
+                android:textColorLink="@color/white"
+                />
 
             <TextView
                 android:id="@+id/TextViewRegister"
                 android:layout_width="wrap_content"
-                android:textColor="@color/cardview_light_background"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
                 android:layout_marginLeft="10dp"
-
+                android:layout_marginTop="0dp"
                 android:text="Registrate"
+
+                android:textColor="@color/cardview_light_background"
                 android:textColorLink="@color/white" />
         </LinearLayout>
     </LinearLayout>

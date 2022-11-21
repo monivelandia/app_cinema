@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "699317449602",
+    "project_id": "apppapeleria-9f301",
+    "storage_bucket": "apppapeleria-9f301.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699317449602:android:4736e89bb9f7f6a68c559b",
+        "android_client_info": {
+          "package_name": "com.example.aplicacion_cine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "699317449602-hnvpurf13fce9nensep15fg1qr8scum2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aplicacion_cine",
+            "certificate_hash": "5bbf6fce81c3f873436709702a8932284f18295a"
+          }
+        },
+        {
+          "client_id": "699317449602-l9nci0nemum54fojct8daqnoph2isd21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJBXF8gxguUZzn4PxHOaaovgH-A7xt0ks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "699317449602-l9nci0nemum54fojct8daqnoph2isd21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
