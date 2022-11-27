@@ -1,8 +1,10 @@
-package com.example.aplicacion_cine;
+package com.example.aplicacion_cine.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.aplicacion_cine.R;
 
 public class HomeActivity extends AppCompatActivity {
 
