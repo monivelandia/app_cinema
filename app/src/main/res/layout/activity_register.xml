@@ -9,7 +9,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@drawable/fondo1"
         android:alpha="0.9"
         />
     <LinearLayout
@@ -28,7 +28,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/morado" />
+                android:background="@color/transparente_n" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,17 +44,17 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_person_24"
+                android:src="@drawable/ic_baseline_account_circle_24"
                 android:layout_marginTop="45dp"/>
+
             <de.hdodenhof.circleimageview.CircleImageView
 
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/ic_baseline_keyboard_backspace_24"
-                app:civ_circle_background_color="@color/transparante_negro"
-                android:layout_margin="20dp"
                 android:id="@+id/circleimageback"
-                />
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:src="@drawable/ic_baseline_keyboard_backspace_24"
+                app:civ_circle_background_color="@color/transparante_negro" />
         </io.github.florent37.shapeofview.shapes.ArcView>
 
         <LinearLayout
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             >
 
             <ImageView
@@ -71,7 +71,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/ic_baseline_account_circle_24"
+                android:background="@drawable/user"
                 />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             >
 
             <ImageView
@@ -100,7 +100,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/ic_baseline_email_24"/>
+                android:background="@drawable/email"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             >
 
             <ImageView
@@ -129,7 +129,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/ic_baseline_password_24"/>
+                android:background="@drawable/password"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             >
 
             <ImageView
@@ -159,7 +159,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/ic_baseline_check_circle_outline_24"/>
+                android:background="@drawable/password_conf"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

@@ -10,7 +10,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@drawable/fondo1"
         android:alpha="0.9"
         />
     <LinearLayout
@@ -29,7 +29,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/morado" />
+                android:background="@color/transparente_n" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_person_24"
+                android:src="@drawable/ic_baseline_account_circle_24"
                 android:layout_marginTop="45dp"/>
 
         </io.github.florent37.shapeofview.shapes.ArcView>
@@ -64,7 +64,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/ic_baseline_account_circle_24"
+                android:background="@drawable/user"
                 />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -75,6 +75,7 @@
                     android:layout_width="330dp"
                     android:layout_height="wrap_content"
                     android:hint="Nombre del usuario"
+                    android:background="@color/transparente_white"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
