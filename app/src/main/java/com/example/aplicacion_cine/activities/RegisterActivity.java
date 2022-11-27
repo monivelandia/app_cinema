@@ -3,6 +3,8 @@ package com.example.aplicacion_cine.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,15 +18,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import dmax.dialog.SpotsDialog;
 
 public class RegisterActivity extends AppCompatActivity {
     //instanciar, es decir asociarlo con el id y que interactue
@@ -34,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText mTextInputEditTextPasswordR ;
     TextInputEditText mTextInputEditTextConfirmPassword ;
     Button mButtonRegister;
+    AlertDialog mDialog;
 
     //FirebaseAuth mAuth;
     //FirebaseFirestore mFirestore;
@@ -59,6 +59,13 @@ public class RegisterActivity extends AppCompatActivity {
         mUsersProvider = new UsersProviders();
         //re de recursos
         //evento del regstro
+
+
+        mDialog= new SpotsDialog.Builder()
+                .setContext(this)
+                .setMessage("Espere un momento")
+                .setCancelable(false).build();
+
         mButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUser(final String username, final String email, String password) {
+        mDialog.show();
         mAuthProvider.register(email, password)
          .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -123,9 +131,14 @@ public class RegisterActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                             mDialog.dismiss();
                             if(task.isSuccessful()){
-                            Toast.makeText(RegisterActivity.this, "El usuario se almaceno con éxito", Toast.LENGTH_LONG).show();
-
+                                Toast.makeText(RegisterActivity.this, "El usuario se almaceno con éxito", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(RegisterActivity.this,HomeActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                //limpiar banderas, es decir, que no se este ejecutando en segundo plano
+                                //Que muera la activdad y comience la otra
+                                startActivity(intent);
                             }else {
                                 Toast.makeText(RegisterActivity.this, "El usuario no se pudo almacenar en la base de datos", Toast.LENGTH_LONG).show();
                             }
@@ -133,7 +146,9 @@ public class RegisterActivity extends AppCompatActivity {
                     });
 
                     Toast.makeText(RegisterActivity.this, "El usuario se ha registrado correctamente", Toast.LENGTH_LONG).show();
-                }else{Toast.makeText(RegisterActivity.this,"No se pudo registrar el usuario",Toast.LENGTH_LONG).show();
+                }else{
+                    mDialog.dismiss();
+                    Toast.makeText(RegisterActivity.this,"No se pudo registrar el usuario",Toast.LENGTH_LONG).show();
                 }
 
             }

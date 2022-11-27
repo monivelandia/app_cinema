@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">aplicacion_cine</string>
+    <string name="hola">Dialog</string>
 </resources>

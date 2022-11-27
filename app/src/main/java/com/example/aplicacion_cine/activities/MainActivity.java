@@ -1,5 +1,6 @@
 package com.example.aplicacion_cine.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import dmax.dialog.SpotsDialog;
+
 public class MainActivity extends AppCompatActivity {
     TextView mTextViewRegister;
     TextInputEditText mTextInputEditTextEmail ;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private final int REQUEST_CODE_GOOGLE = 1; //NECESARO EL ENCAPSULADO
     UsersProviders mUsersproviders;
+    AlertDialog mDialog;
     //Firestore almacena y firebase autentca
 
 
@@ -54,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
         mAuthProviders = new AuthProviders(); //se instancia distinto debido a que es una clase (metodo)
         mUsersproviders = new UsersProviders();
+
+        mDialog= new SpotsDialog.Builder()
+                .setContext(this)
+                .setMessage("Espere un momento")
+                .setCancelable(false).build();
 
 
         mButtonLoginGoogle.setOnClickListener(new View.OnClickListener() {
@@ -113,15 +122,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        mDialog.show();
         mAuthProviders.googleLogin(account)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             String id = mAuthProviders.getUid();
                             checkUserExist(id);
                         } else {
+                            mDialog.dismiss();
                             // If sign in fails, display a message to the user.
                             Log.w("Error", "signInWithCredential:failure", task.getException());
 
@@ -134,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         mUsersproviders.getUser(id).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                mDialog.dismiss();
                 //Elsnapshot trabaja con documentos
                 if(documentSnapshot.exists()){ //si el documento existe
                     Intent intent=new Intent(MainActivity.this,HomeActivity.class);
@@ -150,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            mDialog.dismiss();
                             if (task.isSuccessful()){
                                 Intent intent = new Intent(MainActivity.this,CompleteProfileActivity.class);
                                 startActivity(intent);
@@ -169,11 +183,13 @@ public class MainActivity extends AppCompatActivity {
     private void login() {
         String email = mTextInputEditTextEmail.getText().toString();
         String password = mTextInputEditTextPassword.getText().toString();
+        mDialog.show();
         mAuthProviders.login(email,password).
         addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-               if(task.isSuccessful()){
+                mDialog.dismiss();
+                if(task.isSuccessful()){
                    Intent intent = new Intent( MainActivity.this, HomeActivity.class);
                    startActivity(intent);
 
