@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,9 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aplicacion_cine.R;
+import com.example.aplicacion_cine.models.Post;
+import com.example.aplicacion_cine.providers.AuthProviders;
 import com.example.aplicacion_cine.providers.ImageProviders;
+import com.example.aplicacion_cine.providers.PostProvider;
 import com.example.aplicacion_cine.utils.FileUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.UploadTask;
@@ -39,6 +44,10 @@ public class PostActivity extends AppCompatActivity {
     ImageView mImageViewBooks;
     TextView mTextViewCategory;
     String mCategory="";
+    PostProvider mPostProvider;
+    String  mTittle= "";
+    String mDescription = "";
+    AuthProviders mAuthProviders;
 
 
     @Override
@@ -57,6 +66,8 @@ public class PostActivity extends AppCompatActivity {
 
 
         mImageProvider = new ImageProviders();
+        mPostProvider= new PostProvider();
+        mAuthProviders = new AuthProviders();
 
         mButtonPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +90,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCategory="Arte";
+                mTextViewCategory.setText(mCategory); //Hace que cambie el titulo
             }
         });
 
@@ -86,19 +98,31 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCategory="Colores, marcadores";
+                mTextViewCategory.setText(mCategory);
             }
         });
         mImageViewBooks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCategory = "Cuadernos, agendas";
+                mTextViewCategory.setText(mCategory);
             }
         });
     }
 
     private void clickPost() {
-        String tittle= mTextInputTittle.getText().toString();
-        String Description= mTextInputDescription.getText().toString();
+        mTittle= mTextInputTittle.getText().toString();
+         mDescription= mTextInputDescription.getText().toString();
+        if(!mTittle.isEmpty() && !mDescription.isEmpty() && !mCategory.isEmpty()){
+            if(mImageFile !=null){
+                saveImage();
+
+            }else{
+                Toast.makeText(this, "Selecciona una imagen", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(this, "Completa los campos para continuar", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void saveImage() {
@@ -106,6 +130,29 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if(task.isSuccessful()){
+                    mImageProvider.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String url = uri.toString();
+                            Post post = new Post();
+                            post.setImage1(url);
+                            post.setTittle(mTittle);
+                            post.setDescription(mDescription);
+                            post.setCategory(mCategory);
+                            post.setIdUser(mAuthProviders.getUid());
+
+                            mPostProvider.save(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> tasksave) {
+                                    if(tasksave.isSuccessful()){
+                                        Toast.makeText(PostActivity.this, "La información de almaceno correctamente", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(PostActivity.this, "No se pudo almacenar la información", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                    });
                     Toast.makeText(PostActivity.this, "La imagen se almaceno correctamente", Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(PostActivity.this, "Error al almacenar la imagen", Toast.LENGTH_SHORT).show();
